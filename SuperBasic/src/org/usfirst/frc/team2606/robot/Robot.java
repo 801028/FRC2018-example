@@ -106,6 +106,7 @@ public class Robot extends IterativeRobot {
 		// Basic Tank Drive with x^2 scaling and scale limit
 		double lStickY = controller.getY(Hand.kLeft);
 		double rStickY = controller.getY(Hand.kRight);
+		
 		myDrive.tankDrive(lStickY * orientation * scale, rStickY * orientation * scale, true);
 		
 		// Calvin's Drive with x^2 scaling and scale limit
