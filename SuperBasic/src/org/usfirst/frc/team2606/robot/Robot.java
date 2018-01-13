@@ -10,6 +10,7 @@ package org.usfirst.frc.team2606.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -31,9 +32,14 @@ public class Robot extends IterativeRobot {
 	
 	private XboxController controller;
 	
-	private SpeedController leftMotor;
-	private SpeedController rightMotor;
-	private DifferentialDrive myDrive;
+	private SpeedController leftMotor1;
+	private SpeedController leftMotor2;
+	
+	private SpeedController rightMotor1;
+	private SpeedController rightMotor2;
+	
+	private DifferentialDrive myDrive1;
+	private DifferentialDrive myDrive2;
 	
 	private double scale;
 	private double orientation;
@@ -52,11 +58,15 @@ public class Robot extends IterativeRobot {
 		controller = new XboxController(0);
 		
 		// Initialize jaeeegs
-		leftMotor = new Jaguar(1);
-		rightMotor = new Jaguar(2);
+		leftMotor1 = new Talon(0);
+		leftMotor2 = new Talon(3);
+		
+		rightMotor1 = new Talon(1);
+		rightMotor2 = new Talon(2);
 		
 		// Initiate nostalgia drive
-		myDrive = new DifferentialDrive(leftMotor, rightMotor);
+		myDrive1 = new DifferentialDrive(leftMotor1, rightMotor1);
+		myDrive2 = new DifferentialDrive(leftMotor2, rightMotor2);
 		
 		// Initialize global constants
 		scale = 0.7;
@@ -107,16 +117,8 @@ public class Robot extends IterativeRobot {
 		double lStickY = controller.getY(Hand.kLeft);
 		double rStickY = controller.getY(Hand.kRight);
 		
-		myDrive.tankDrive(lStickY * orientation * scale, rStickY * orientation * scale, true);
-		
-		// Calvin's Drive with x^2 scaling and scale limit
-//		double lStickX = controller.getX(Hand.kLeft);
-//		double lTrigger = controller.getTriggerAxis(Hand.kLeft);
-//		double rTrigger = controller.getTriggerAxis(Hand.kRight);
-//		
-//		double xSpeed = (rTrigger - lTrigger) * scale * orientation;
-//		double zRotation = lStickX  * scale * orientation;
-//		myDrive.arcadeDrive(xSpeed, zRotation, true);
+		myDrive1.tankDrive(lStickY * orientation * scale, rStickY * orientation * scale, true);
+		myDrive2.tankDrive(lStickY * orientation * scale, rStickY * orientation * scale, true);
 	}
 
 	/**
