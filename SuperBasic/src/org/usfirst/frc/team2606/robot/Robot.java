@@ -103,8 +103,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
-		
 		// Basic Tank Drive with x^2 scaling and scale limit
 		double lStickY = controller.getY(Hand.kLeft);
 		double rStickY = controller.getY(Hand.kRight);
